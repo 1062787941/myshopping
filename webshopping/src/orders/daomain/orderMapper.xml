@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	购物车
+ -->
+<mapper namespace="OrderItemNameSpace">
+
+	<resultMap type="com.shop.orders.daomain.OrderItem" id="orderItemMap" >
+		<id property="itemid" column="itemid"/>
+		<result property="subtotal" column="subtotal"/>
+		<result property="count" column="count"/>
+	</resultMap>
+		
+</mapper>
