@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+      xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:aop="http://www.springframework.org/schema/aop"
+      xmlns:tx="http://www.springframework.org/schema/tx"
+	  xmlns:mvc="http://www.springframework.org/schema/mvc"
+		
+      xsi:schemaLocation="
+	
+	  http://www.springframework.org/schema/beans 
+	  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	  
+	  http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd
+ 	  
+	  http://www.springframework.org/schema/aop 
+	  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	  
+	  http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        
+      ">
+      
+         <!-- 配置C3P0连接池,目的：管理数据库连接 -->
+      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+      		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+      		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/shop"/>
+      		<property name="user" value="root"/>
+      		<property name="password" value="root"/>
+      </bean>
+      
+      
+      <!-- 配置SqlSessionFactoryBean，目的：加载mybaits配置文件和映射文件，即替代原Mybatis工具类的作用 -->
+      <bean id="sqlSessionFactoryBeanID" class="org.mybatis.spring.SqlSessionFactoryBean">
+      		<property name="configLocation" value="classpath:mybatis.xml"/>
+      		<property name="dataSource" ref="dataSource"/>
+      </bean>
+ 
+      <!-- 配置Mybatis的事务管理器，即因为Mybatis底层用的是JDBC事务管事器，所以在这里依然配置JDBC事务管理器 -->
+      <bean id="dataSourceTransactionManagerID" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      		<property name="dataSource" ref="dataSource"/>
+      </bean>
+      
+<!--       配置事务通知，即让哪些方法需要事务支持
+      <tx:advice id="tx" transaction-manager="dataSourceTransactionManagerID">
+      		<tx:attributes>
+      			<tx:method name="*" propagation="REQUIRED"/>
+      		</tx:attributes>
+      </tx:advice> -->
+      
+  <!--     配置事务切面，即让哪些包下的类需要事务
+      <aop:config>
+      		<aop:pointcut id="pointcut" expression="execution(* cn.itcast.javaee.mybatis.dao.*.*(..))"/>
+     		<aop:advisor advice-ref="tx" pointcut-ref="pointcut"/>
+      </aop:config> -->
+<!-- 
+      注册EmpAction
+      <context:component-scan base-package="cn.itcast.javaee.mybatis.action"/>
+ -->
+
+	  <!-- 通知springioc容器这些注解的作用 -->
+      <context:annotation-config/>
+      
+  <!--     视图解析器
+      <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      		<property name="prefix" value="/jsp/"/>
+      		<property name="suffix" value=".jsp"/>
+      </bean>
+       -->
+      
+</beans>      
