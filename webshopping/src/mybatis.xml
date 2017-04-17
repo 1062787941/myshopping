@@ -8,6 +8,10 @@
 	<mappers>
 	<!-- 用户的配置-->
 		<mapper resource="user/daomain/userMapper.xml"/>
+		
+	<!-- 管理员配置 -->
+		<mapper resource="admin/daomain/adminMapper.xml"/>
+	
 	</mappers>
 	
 

@@ -53,6 +53,11 @@
       	<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
       
+      <!-- 管理员注入 -->
+      <bean id="adminDao" class="admin.dao.AdminDaoImpl">
+      	<property name="factory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      
 <!--       配置事务通知，即让哪些方法需要事务支持
       <tx:advice id="tx" transaction-manager="dataSourceTransactionManagerID">
       		<tx:attributes>

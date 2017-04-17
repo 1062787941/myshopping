@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	管理员
+ -->
+<mapper namespace="AdminNameSpace">
+
+	<resultMap type="admin.daomain.Admin" id="adminMap" >
+		<id property="uid" column="uid"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+	</resultMap>
+	
+	<!-- 管理员登录 -->
+	<select id="login" parameterType="admin.daomain.Admin" resultMap="adminMap">
+		select uid,username,password from adminuser
+		where username=#{username} and password=#{password}
+	</select>
+</mapper>
