@@ -1,8 +1,7 @@
 package orders.dao;
 import java.util.List;
 
-import javax.persistence.criteria.Order;
-
+import orders.daomain.Order;
 import orders.daomain.OrderItem;
 
 

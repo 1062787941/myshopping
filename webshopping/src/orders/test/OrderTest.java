@@ -21,8 +21,8 @@ public class OrderTest {
 		User user = new User(7, "aaa", "aaa", "哈哈", "aaa@shop.com",
 				"15726607618", "北京市西三旗中腾建华3楼", 1, null, null);
 		Order order = new Order(7001,(double) 83,new Date(),1, "姜涛","15726607618 ",
-				" 北京市西三旗中",user);
-//		dao.save(order);
+				" 北京市西三旗中",user,null);
+		dao.save(order);
 //		int i = dao.findCountByUid(1);
 //		System.out.println(i);
 		
@@ -33,13 +33,13 @@ public class OrderTest {
 //		}
 //		
 //		dao.update(order);
-		int i = dao.findCount();
-		System.out.println(i);
-		List<Order> ls = dao.findByPage(0, 7);
-		
-		System.out.println(ls);
-		for(Order o :ls){
-			System.out.println(o.getName()+"--");
-		}
+//		int i = dao.findCount();
+//		System.out.println(i);
+//		List<Order> ls = dao.findByPage(0, 7);
+//		
+//		System.out.println(ls);
+//		for(Order o :ls){
+//			System.out.println(o.getName()+"--");
+//		}
 	}
 }

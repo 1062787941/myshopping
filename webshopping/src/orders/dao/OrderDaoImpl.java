@@ -5,8 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.criteria.Order;
-
+import orders.daomain.Order;
 import orders.daomain.OrderItem;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,6 +16,7 @@ public class OrderDaoImpl implements OrderDao{
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
+	
 	//保存订单
 	public void save(Order order) {
 		sqlSessionFactory.openSession().
@@ -75,4 +75,6 @@ public class OrderDaoImpl implements OrderDao{
 		
 		return null;
 	}
+
+
 }

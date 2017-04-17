@@ -6,7 +6,7 @@
  -->
 <mapper namespace="OrderItemNameSpace">
 
-	<resultMap type="com.shop.orders.daomain.OrderItem" id="orderItemMap" >
+	<resultMap type="orders.daomain.OrderItem" id="orderItemMap" >
 		<id property="itemid" column="itemid"/>
 		<result property="subtotal" column="subtotal"/>
 		<result property="count" column="count"/>

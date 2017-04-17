@@ -2,14 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 
-	购物车
+	订单
  -->
-<mapper namespace="OrderItemNameSpace">
-
-	<resultMap type="com.shop.orders.daomain.OrderItem" id="orderItemMap" >
-		<id property="itemid" column="itemid"/>
-		<result property="subtotal" column="subtotal"/>
-		<result property="count" column="count"/>
+<mapper namespace="OrderNameSpace">
+	
+	<resultMap type="orders.daomain.Order" id="orderMap" >
+		<id property="oid" column="oid"/>
+		<result property="total" column="total"/>
+		<result property="ordertime" column="ordertime"/>
+		<result property="state" column="state"/>
+		<result property="name" column="name"/>
+		<result property="phone" column="phone"/>
+		<result property="addr" column="addr"/>
 	</resultMap>
-		
+	 
+	 <!--  -->
+	<insert id="save" parameterType="orders.daomain.Order">
+		insert into orders(oid,total,ordertime,state,name,phone,addr,uid)
+		values (#{oid},#{total},#{ordertime},#{state},#{name},
+			#{phone},#{addr},#{user.uid})
+	</insert>
 </mapper>
