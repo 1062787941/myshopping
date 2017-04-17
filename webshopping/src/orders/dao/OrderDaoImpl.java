@@ -71,10 +71,8 @@ public class OrderDaoImpl implements OrderDao{
 	
 	// DAo中根据订单id查询订单项
 	public List<OrderItem> findOrderItem(Integer oid){
-		
-		
-		return null;
+		return sqlSessionFactory.openSession()
+			.selectList("OrderNameSpace.findOrderItem", oid);
 	}
-
 
 }
