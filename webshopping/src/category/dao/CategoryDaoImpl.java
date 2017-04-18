@@ -33,10 +33,9 @@ public class CategoryDaoImpl implements CategoryDao{
 		sessionFactory.openSession().delete("CategoryNameSpace.delete", category);
 	}
 
-	@Override
+	@Override //修改一级分类
 	public void update(Category category) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.openSession().update("CategoryNameSpace.update", category);
 	}
 
 }

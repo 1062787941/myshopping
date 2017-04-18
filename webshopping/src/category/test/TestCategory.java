@@ -21,7 +21,8 @@ public class TestCategory {
 //		}
 //		dao.save(new Category(11, "颜色"));
 //		System.out.println(dao.findByCid(1));
-		dao.delete(new Category(11, "颜色"));
+//		dao.delete(new Category(11, "颜色"));
+//		dao.update(new Category(11, "ceshi"));
 	}
 
 }

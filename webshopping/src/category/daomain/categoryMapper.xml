@@ -28,10 +28,12 @@
 	
 	<!-- 删除一级分类 -->
 	<delete id="delete" parameterType="category.daomain.Category">
-		delete from category c inner join categorysecond cs
-		 on c.cid=cs.csid where c.cid=#{cid}
-		delete cid,cname from  categorysecond cs, category c 
-			where cs.cid=c.cid=#{cid}
+		delete from category where cid=#{cid}
 	</delete>
+	
+	<!--修改一级分类 -->
+	<update id="update" parameterType="category.daomain.Category">
+		update category set cname=#{cname} where cid=#{cid}
+	</update>
 	
 </mapper>
