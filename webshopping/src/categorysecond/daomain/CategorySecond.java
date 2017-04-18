@@ -16,6 +16,17 @@ public class CategorySecond {
 	private Category category;
 	// 配置商品集合
 	private Set<Product> products = new HashSet<Product>();
+	
+	public CategorySecond(){}
+	
+	public CategorySecond(Integer csid, String csname, Category category,
+			Set<Product> products) {
+		this.csid = csid;
+		this.csname = csname;
+		this.category = category;
+		this.products = products;
+	}
+	
 	public Integer getCsid() {
 		return csid;
 	}
