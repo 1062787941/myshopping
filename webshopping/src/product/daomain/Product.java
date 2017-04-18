@@ -16,8 +16,23 @@ public class Product {
 	private String pdesc;
 	private Integer is_hot;
 	private Date pdate;
+	
 	// 二级分类的外键:使用二级分类的对象.
 	private CategorySecond categorySecond;
+	public Product(){}
+	public Product(Integer pid, String pname, Double market_price,
+			Double shop_price, String image, String pdesc, Integer is_hot,
+			Date pdate, CategorySecond categorySecond) {
+		this.pid = pid;
+		this.pname = pname;
+		this.market_price = market_price;
+		this.shop_price = shop_price;
+		this.image = image;
+		this.pdesc = pdesc;
+		this.is_hot = is_hot;
+		this.pdate = pdate;
+		this.categorySecond = categorySecond;
+	}
 	public Integer getPid() {
 		return pid;
 	}

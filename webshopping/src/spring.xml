@@ -27,7 +27,7 @@
       ">
       
          <!-- 配置C3P0连接池,目的：管理数据库连接 -->
-      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" >
       		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
       		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/shop"/>
       		<property name="user" value="root"/>
@@ -64,6 +64,16 @@
       
       <!-- 一级目录 -->
       <bean id="categoryDao" class="category.dao.CategoryDaoImpl">
+      		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      
+      <!-- 二级目录 -->
+      <bean id="categorySecondDao" class="categorysecond.dao.CategorySecondDaoImpl">
+      		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      
+      <!-- 商品 -->
+      <bean id="productDao" class="product.dao.ProductDaoImpl">
       		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
       

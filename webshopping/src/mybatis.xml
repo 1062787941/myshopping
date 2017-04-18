@@ -19,8 +19,10 @@
 		<!-- 一级分类的实体目录 -->
 		<mapper resource="category/daomain/categoryMapper.xml"/>
 		<!-- 二级分类的实体目录 -->
-		<!-- <mapper resource="categorysecond/daomain/categorySecondMapper.xml"/>
-	 -->
+		<mapper resource="categorysecond/daomain/categorySecondMapper.xml"/>
+	 
+	 	<!-- 商品实体 -->
+	 	<mapper resource="product/daomain/productMapper.xml"/>
 	</mappers>
 	
 

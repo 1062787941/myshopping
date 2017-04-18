@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 商品 -->
+
+<mapper namespace="ProductNameSpace">
+
+	<resultMap type="product.daomain.Product" id="productMap">
+		<id property="pid" column="pid" />
+		<result property="pname" column="pname" />
+		<result property="market_price" column="market_price" />
+		<result property="shop_price" column="shop_price" />
+		<result property="image" column="image" />
+		<result property="pdesc" column="pdesc" />
+		<result property="is_hot" column="is_hot" />
+		<result property="pdate" column="pdate" />
+	</resultMap>
+	
+	<!--查询热门的商品,条件就是is_host = 1 -->
+	<select id="findHot" resultMap="productMap">
+		select pid,pname,market_price,shop_price,image,pdesc,pdate
+		from product where is_hot=1
+	</select>
+
+</mapper>
