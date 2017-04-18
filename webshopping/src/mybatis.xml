@@ -6,12 +6,21 @@
 <configuration>
 
 	<mappers>
-	<!-- 用户的配置-->
+		<!-- 用户的配置-->
 		<mapper resource="user/daomain/userMapper.xml"/>
 		
-	<!-- 管理员配置 -->
+		<!-- 管理员配置 -->
 		<mapper resource="admin/daomain/adminMapper.xml"/>
 	
+		<!-- 订单配置 -->
+		<mapper resource="orders/daomain/orderMapper.xml"/>
+		<mapper resource="orders/daomain/orderItemMapper.xml"/>
+		
+		<!-- 一级分类的实体目录 -->
+		<mapper resource="category/daomain/categoryMapper.xml"/>
+		<!-- 二级分类的实体目录 -->
+		<!-- <mapper resource="categorysecond/daomain/categorySecondMapper.xml"/>
+	 -->
 	</mappers>
 	
 

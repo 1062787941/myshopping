@@ -47,7 +47,6 @@
       </bean>
       
       
-      
       <!-- 用户注入 -->
       <bean id="userDao" class="user.dao.UserDaoImpl">
       	<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
@@ -56,6 +55,16 @@
       <!-- 管理员注入 -->
       <bean id="adminDao" class="admin.dao.AdminDaoImpl">
       	<property name="factory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      
+      <!-- 订单的注入 -->
+      <bean id="orderDao" class="orders.dao.OrderDaoImpl">
+      		<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      
+      <!-- 一级目录 -->
+      <bean id="categoryDao" class="category.dao.CategoryDaoImpl">
+      		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
       
 <!--       配置事务通知，即让哪些方法需要事务支持

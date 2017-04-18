@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	一级目录
+ -->
+<mapper namespace="CategoryNameSpace">
+
+	<resultMap type="category.daomain.Category" id="categoryMap" >
+		<id property="cid" column="cid"/>
+		<result property="cname" column="cname"/>
+	</resultMap>
+	
+	<!-- 查询所有一级分类的方法 -->
+	<select id="findAll" resultMap="categoryMap">
+		select cid,cname from category
+	</select>
+	
+	<!-- 保存一级分类的方法 -->
+	<insert id="save" parameterType="category.daomain.Category">
+		insert into category(cid,cname) values (#{cid},#{cname})
+	</insert>
+	
+	<!-- 根据一级分类id查询一级分类 -->
+	<select id="findByCid" parameterType="int" resultMap="categoryMap">
+		select cid,cname from category where cid=#{cid}
+	</select>
+	
+	<!-- 删除一级分类 -->
+	<delete id="delete" parameterType="category.daomain.Category">
+		delete from category c inner join categorysecond cs
+		 on c.cid=cs.csid where c.cid=#{cid}
+		delete cid,cname from  categorysecond cs, category c 
+			where cs.cid=c.cid=#{cid}
+	</delete>
+	
+</mapper>
