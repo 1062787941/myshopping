@@ -1,6 +1,8 @@
 package product.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -16,73 +18,85 @@ public class ProductDaoImpl implements ProductDao{
 	@Override // 首页上热门商品查询
 	public List<Product> findHot() {
 		// 查询热门的商品,条件就是is_host = 1
-		return sessionFactory.openSession().selectList("ProductNameSpace.findHot");
+		return sessionFactory.openSession().
+				selectList("ProductNameSpace.findHot");
 	}
 
-	@Override
+	@Override //首页上最新商品的查询
 	public List<Product> findNew() {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.openSession().
+				selectList("ProductNameSpace.findNew");
 	}
 
-	@Override
+	@Override // 根据商品ID查询商品
 	public Product findByPid(Integer pid) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.openSession().
+					selectOne("ProductNameSpace.findByPid",pid);
 	}
 
-	@Override
+	/**
+	 * ---------------TODO
+	 */
+	@Override// 根据分类id查询商品的个数
 	public int findCountCid(Integer cid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sessionFactory.openSession().
+				selectOne("ProductNameSpace.findCountCid",cid);
 	}
 
-	@Override
+	@Override// 根据分类id查询商品的集合
 	public List<Product> findByPageCid(Integer cid, int begin, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cid", cid);
+		map.put("begin", begin);
+		map.put("limit", limit);
+		return sessionFactory.openSession().
+				selectList("ProductNameSpace.findByPageCid",map);
 	}
 
-	@Override
+	@Override // 根据二级分类查询商品个数
 	public int findCountCsid(Integer csid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sessionFactory.openSession().
+				selectOne("ProductNameSpace.findCountCsid",csid);
 	}
 
-	@Override
+	@Override // 根据二级分类查询商品信息
 	public List<Product> findByPageCsid(Integer csid, int begin, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("csid", csid);
+		map.put("begin", begin);
+		map.put("limit", limit);
+		return sessionFactory.openSession().
+				selectList("ProductNameSpace.findByPageCsid",map);
 	}
 
-	@Override
+	@Override // 后台统计商品个数的方法
 	public int findCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sessionFactory.openSession().
+				selectOne("ProductNameSpace.findCount");
 	}
 
-	@Override
+	@Override// 后台查询所有商品的方法
 	public List<Product> findByPage(int begin, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("begin", begin);
+		map.put("limit", limit);
+		return sessionFactory.openSession().
+				selectList("ProductNameSpace.findByPage",map);
 	}
 
-	@Override
+	@Override // DAO中的保存商品的方法
 	public void save(Product product) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.openSession().insert("ProductNameSpace.save",product);
 	}
 
-	@Override
+	@Override// DAO中的删除商品的方法 
 	public void delete(Product product) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.openSession().delete("ProductNameSpace.delete", product);
 	}
 
-	@Override
+	@Override //更新商品
 	public void update(Product product) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.openSession().update("ProductNameSpace.update",product);
 	}
 
 }

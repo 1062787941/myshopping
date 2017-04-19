@@ -22,5 +22,81 @@
 		select pid,pname,market_price,shop_price,image,pdesc,pdate
 		from product where is_hot=1
 	</select>
+	
+	<!--首页上最新商品的查询 -->
+	<select id="findNew" resultMap="productMap">
+		SELECT pid,pname,market_price,shop_price,image,pdesc,pdate
+		FROM product ORDER BY pdate DESC LIMIT 0,10
+	</select>
+	
+	<!--根据商品ID查询商品-->
+	<select id="findByPid" parameterType="int" resultMap="productMap">
+		SELECT pid,pname,market_price,shop_price,image,pdesc,pdate,is_hot
+		from product where pid=#{pid}
+	</select>
+	<!--    
+		带完成( 完成)
+	 -->
+	<!-- // 根据分类id查询商品的个数-->
+	<select id="findCountCid" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM category c,categorysecond cs,product p 
+		WHERE c.cid = cs.cid AND cs.csid = p.csid AND c.cid=#{cid}
+	</select>
+	
+	<!-- // 根据分类id查询商品的集合
+	public List<Product> (Integer cid, int begin, int limit) -->
+	<select id="findByPageCid" parameterType="map" resultMap="productMap">
+		SELECT p.* FROM category c,categorysecond cs,product p 
+		WHERE c.cid = cs.cid AND cs.csid = p.csid AND c.cid=#{cid}
+		limit #{begin},#{limit}
+	</select>
+	
+	<!--根据二级分类查询商品个数-->
+	<select id="findCountCsid" parameterType="int" resultType="int">
+		select count(*) from product p where p.csid=#{csid}
+	</select>
+	
+	<!-- // 根据二级分类查询商品信息
+	public List<Product> (Integer csid, int begin, int limit) -->
+	<select id="findByPageCsid" parameterType="map" resultMap="productMap">
+		SELECT p.* FROM Product p JOIN categorySecond cs 
+		ON p.csid=cs.csid WHERE cs.csid=#{csid}
+		limit #{begin},#{limit}
+	</select>
+	
+	<!-- // 后台统计商品个数的方法
+	public int findCount() -->
+	<select id="findCount" resultType="int">
+		select count(*) from Product
+	</select>
+	
+	<!-- // 后台查询所有商品的方法
+	public List<Product> (int begin, int limit)  -->
+	<select id="findByPage" parameterType="map" resultMap="productMap">
+		select p.* from product p 
+		limit #{begin},#{limit}
+	</select>
+	
+	<!-- 保存商品 -->
+	<insert id="save" parameterType="product.daomain.Product">
+		insert into product(pid,pname,market_price,shop_price,image,
+			pdesc,is_hot,pdate,csid) 
+		values(#{pid},#{pname},#{market_price},#{shop_price},#{image},
+			#{pdesc},#{is_hot},#{pdate},#{categorySecond.csid})
+	</insert>
+	
+	<!-- 更新商品 -->
+	<update id="update" parameterType="product.daomain.Product">
+		update product set 
+		pname=#{pname},market_price=#{market_price},
+		shop_price=#{shop_price},image=#{image},pdesc=#{pdesc},
+		is_hot=#{is_hot},pdate=#{pdate},csid=#{categorySecond.csid}
+		where pid=#{pid}
+	</update>
+	
+	<!-- 删除商品 -->
+	<delete id="delete"  parameterType="product.daomain.Product">
+		delete from product where pid=#{pid}
+	</delete>
 
 </mapper>
