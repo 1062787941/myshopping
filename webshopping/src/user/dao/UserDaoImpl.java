@@ -18,18 +18,7 @@ public class UserDaoImpl implements UserDao {
 	// TODO
 	@Override // 按名次查询是否有该用户
 	public User findByUsername(String username) throws Exception {
-		SqlSession sqlSession = null;
-		try {
-			sqlSession = sqlSessionFactory.openSession();
-			return sqlSession.selectOne("UserNameSpace.findByUsername", username);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if (sqlSession != null) {
-				sqlSession.close();
-			}
-		}
+		return sqlSessionFactory.openSession().selectOne("UserNameSpace.findByUsername",username);
 	}
 
 	@Override // 注册用户存入数据库代码实现

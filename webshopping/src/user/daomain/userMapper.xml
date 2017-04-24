@@ -18,6 +18,13 @@
 		<result property="code" column="code"/>
 	</resultMap>
 	
+	<!-- 按名字查询是否有该用户 -->
+	<select id="findByUsername" parameterType="string" resultMap="userMap">
+		select uid
+		from user u
+		where u.username=#{username}
+	</select>
+	
 	<!-- 注册用户存入数据库代码实现 -->
 	<insert id="save" parameterType="user.daomain.User">
 		insert into user(uid,username,password,name,email,phone,addr,state,code) 
