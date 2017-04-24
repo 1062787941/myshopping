@@ -1,27 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-
-    <title>网上购物系统</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <title>网上购物系统管理中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="${pageContext.request.contextPath }/css/admin/main.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/css/public.css" rel="stylesheet" type="text/css" />
+  	<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+    
   </head>
 
   <body>
-    <form method="post" action="${pageContext.request.contextPath }/" target="_parent" name='theForm' onsubmit="return validate()">
+  	<div id="admin_msg">${msg }<div>
+    <form method="post" action="${pageContext.request.contextPath }/admin/adminLogin.action" target="_parent" name='theForm' id="adminFrom" onsubmit="return validate()">
         <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
             <tr>
                 <td style="padding-left: 50px">
@@ -47,27 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </table>
         <input type="hidden" name="act" value="signin" />
     </form>
-
-    <script language="JavaScript">
-    <!--
-    document.forms['theForm'].elements['username'].focus();
-
-    /**
-    * 检查表单输入的内容
-    */
-    function validate()
-    {
-    var validator = new Validator('theForm');
-    validator.required('username', user_name_empty);
-    //validator.required('password', password_empty);
-    if (document.forms['theForm'].elements['captcha'])
-    {
-    validator.required('captcha', captcha_empty);
-    }
-    return validator.passed();
-    }
-
-    //-->
+    
+    <script>
+    
     </script>
   </body>
 </html>
