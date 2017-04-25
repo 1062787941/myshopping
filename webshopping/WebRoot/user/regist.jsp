@@ -5,12 +5,46 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>会员注册</title>
-<link href="${pageContext.request.contextPath}/css/common.css"
+	<link href="${pageContext.request.contextPath}/css/common.css"
 	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/register.css"
+	<link href="${pageContext.request.contextPath}/css/register.css"
 	rel="stylesheet" type="text/css" />
+	
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
 
-<script>
+    <script type="text/javascript">
+        //点击切换验证码
+        function changeVerifyCode(){
+            $("#yzmImg").attr("src","${pageContext.request.contextPath}/Kaptcha.jpg?"+Math.floor(Math.random()*100));
+        }
+        
+        //验证码校验提交
+        function doSubmit() {
+            var verifyCodeValue = $("#verifyCode").val();
+            if(verifyCodeValue.replace(/\s/g,"") == "") {
+                alert("请输入验证码");
+            }else {
+                //提交前先异步检查验证码是否输入正确
+                var verifyUrl = "${pageContext.request.contextPath}/servlet/VerifyServlet?verifyCode="+verifyCodeValue;
+                $.ajax({
+                    type:"GET",
+                    url:verifyUrl,
+                    success:function(returnData){
+                        if(returnData!="Y") {
+                            alert("请输入正确的验证码！");
+                        }else {
+                            //验证码正确，进行提交操作
+                            alert("验证码输入正确，提交表单");
+                        }
+                    },
+                    error:function(e){
+                        alert(e);
+                    }
+                });
+            }
+        }
+    
+    //检查表单数据
 	function checkForm() {
 		// 校验用户名:
 		// 获得用户名文本框的值:
@@ -32,66 +66,53 @@
 			alert("两次密码输入不一致!");
 			return false;
 		}
-	}
-
-	function checkUsername() {
-		// 获得文件框值:
-		var username = document.getElementById("username").value;
-		// 1.创建异步交互对象
-		var xhr = createXmlHttp();
-		// 2.设置监听
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4) {
-				if (xhr.status == 200) {
-					document.getElementById("span1").innerHTML = xhr.responseText;
-				}
-			}
+		
+		//验证email
+		var email = document.getElementById("email").value;
+		var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+		if(reg.test(email)){
+			alert("email可用");
+			return true;
+		}else{
+			alert("邮箱格式不正确！");
+			return false;
 		}
-		// 3.打开连接
-		xhr.open("GET",
-				"${pageContext.request.contextPath}/user_findByName.action?time="
-						+ new Date().getTime() + "&username=" + username, true);
-		// 4.发送
-		xhr.send(null);
 	}
 
-	function createXmlHttp() {
-		var xmlHttp;
-		try { // Firefox, Opera 8.0+, Safari
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {// Internet Explorer
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				try {
-					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-				} catch (e) {
-				}
-			}
-		}
-
-		return xmlHttp;
-	}
-
-	function change() {
-		var img1 = document.getElementById("checkImg");
-		img1.src = "${pageContext.request.contextPath}/checkImg/checkImg.action?"
-				+ new Date().getTime();
-	}
+	 function checkUser(){
+          var username=$("#username").val();
+          $.ajax({
+             url:"${pageContext.request.contextPath}/user/user_findByName.action",
+             type:"post",
+             data:{"username":username},
+             dataType:"json",
+            success:function(data){
+                 if (data!=null ) {
+                  $("#span1").text("用户名已存在");
+                  $("#span1").val('');
+              } else if(data==null && username !=''){
+                  $("#span1").text("用户名可用");
+              }
+            }
+          });
+      }
 </script>
 </head>
 <body>
 	<div class="container header">
 		<div class="span5">
 			<div class="logo">
-				<a href="http://localhost:8080/mango/"> <img
-					src="${pageContext.request.contextPath}/image/title.png" alt="网上购物"></a>
+			<!--  
+				<a href="http://localhost:8080/mango/"> 
+				-->
+				<img src="${pageContext.request.contextPath}/image/title.png" alt="网上购物" />
+					</a>
 			</div>
 		</div>
 		<div class="span9">
 			<div class="headerAd">
 				<img src="${pageContext.request.contextPath}/image/header.jpg"
-					width="320" height="50" alt="正品保障" title="正品保障">
+					width="320" height="50" alt="正品保障" title="正品保障" />
 			</div>
 		</div>
 
@@ -106,22 +127,25 @@
 						<strong>会员注册</strong>USER REGISTER
 					</div>
 					<form id="registerForm"
-						action="${ pageContext.request.contextPath }/user/regist.action"
-						method="post" novalidate="novalidate"
-						onsubmit="return checkForm();">
+							action="${ pageContext.request.contextPath }/user/regist.action"
+							method="post" novalidate="novalidate"
+							onsubmit="return checkForm();">
 						<table>
 							<tbody>
 								<tr>
 									<th><span class="requiredField">*</span>用户名:</th>
-									<td><input type="text" id="username" name="username"
-										class="text" maxlength="20" onblur="checkUsername()" /> <span
-										id="span1"></span></td>
+									<td>
+										<input type="text" id="username" name="username"
+										class="text" maxlength="20" onblur="checkUser()" /> 
+										<span id="span1"></span>
+									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>密&nbsp;&nbsp;码:</th>
-									<td><input type="password" id="password" name="password"
-										class="text" maxlength="20" autocomplete="off" /> <span><s:fielderror
-												fieldName="password" /></span></td>
+									<td>
+										<input type="password" id="password" name="password"
+										class="text" maxlength="20" autocomplete="off" /> 
+									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>确认密码:</th>
@@ -131,14 +155,16 @@
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>E-mail:</th>
-									<td><input type="text" id="email" name="email"
-										class="text" maxlength="200"> <span><s:fielderror
-													fieldName="email" /></span></td>
+									<td>
+										<input type="text" id="email" name="email"
+										class="text" maxlength="200" /> 
+									</td>
 								</tr>
 								<tr>
 									<th>姓名:</th>
-									<td><input type="text" name="name" class="text"
-										maxlength="200" /> <span><s:fielderror fieldName="name" /></span>
+									<td>
+										<input type="text" name="name" class="text"
+										maxlength="200" /> 
 									</td>
 								</tr>
 
@@ -150,22 +176,23 @@
 								<tr>
 									<th>地址:</th>
 									<td><input type="text" name="addr" class="text"
-										maxlength="200" /> <span><s:fielderror fieldName="addr" /></span>
+										maxlength="200" />
 									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>验证码:</th>
-									<td><span class="fieldSet"> <input type="text"
-											id="checkcode" name="checkcode" class="text captcha"
-											maxlength="4" autocomplete="off"><img id="checkImg"
-												class="captchaImage"
-												src="${pageContext.request.contextPath}/checkImg/checkImg.action"
-												onclick="change()" title="点击更换验证码"></span></td>
+									<td>
+										<span class="fieldSet"> 
+												<input type="text" class="text" name="verifyCode" id="verifyCode" />
+                    							<img src="${pageContext.request.contextPath}/Kaptcha.jpg" onclick="changeVerifyCode()" id="yzmImg" style="cursor: pointer;" />
+                   							 	<a href="javascript:void(0)" onclick="changeVerifyCode()">看不清，换一张</a>
+										</span>
+									</td>
 								</tr>
 								<tr>
 									<th>&nbsp;</th>
 									<td>
-										<input type="submit" class="submit" value="同意以下协议并注册">
+										<input type="submit" class="submit" value="同意以下协议并注册" onclick="doSubmit()"/>
 									</td>
 								</tr>
 								<tr>
@@ -281,14 +308,9 @@
 			</ul>
 		</div>
 		<div class="span24">
-			<div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+			<div class="copyright">Copyright © 2017-2027 网上商城系统 版权所有</div>
 		</div>
 	</div>
-	<div id="_my97DP"
-		style="position: absolute; top: -1970px; left: -1970px;">
-		<iframe style="width: 190px; height: 191px;"
-			src="./会员注册 - Powered By Mango Team_files/My97DatePicker.htm"
-			frameborder="0" border="0" scrolling="no"></iframe>
-	</div>
 </body>
+
 </html>
