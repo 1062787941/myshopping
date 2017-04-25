@@ -51,10 +51,16 @@
       <bean id="userDao" class="user.dao.UserDaoImpl">
       	<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
+      <bean id="userServiceID" class="user.service.UserServiceimpl">
+      	<property name="userDao" ref="userDao"></property>
+      </bean>
       
       <!-- 管理员注入 -->
       <bean id="adminDao" class="admin.dao.AdminDaoImpl">
       	<property name="factory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      <bean id="adminServiceID" class="admin.service.AdminService">
+      	<property name="adminDao" ref="adminDao"></property>
       </bean>
       
       <!-- 订单的注入 -->
@@ -89,19 +95,43 @@
       		<aop:pointcut id="pointcut" expression="execution(* cn.itcast.javaee.mybatis.dao.*.*(..))"/>
      		<aop:advisor advice-ref="tx" pointcut-ref="pointcut"/>
       </aop:config> -->
-<!-- 
-      注册EmpAction
-      <context:component-scan base-package="cn.itcast.javaee.mybatis.action"/>
- -->
+      
+		<!--  注册EmpAction -->
+      <context:component-scan base-package="*.action"/>
 
 	  <!-- 通知springioc容器这些注解的作用 -->
-      <context:annotation-config/>
+      <context:annotation-config />
       
-  <!--     视图解析器
+ 	 <!--视图解析器-->
       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      		<property name="prefix" value="/jsp/"/>
       		<property name="suffix" value=".jsp"/>
       </bean>
-       -->
+      
+        <!-- json数据 -->
+		<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+			<property name="messageConverters">
+					<list>
+						<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+					</list>
+			</property>
+		 </bean>
+         
+        
+      <!-- 验证码图片 -->
+      <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+      	<property name="config">
+      		<bean class="com.google.code.kaptcha.util.Config">
+      			<constructor-arg type="java.util.Properties">
+      				<props>
+      					<prop key="kaptcha.image.width">100</prop>
+      					<prop key="kaptcha.image.height">50</prop> 
+      					<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop> 
+      					<prop key="kaptcha.textproducer.char.string">0123456789abcdefghijklmnopqrstuvwxyz</prop>  
+      					<prop key="kaptcha.textproducer.char.length">4</prop>
+      				</props>
+      			</constructor-arg>
+      		</bean>
+      	</property>
+      </bean>
       
 </beans>      

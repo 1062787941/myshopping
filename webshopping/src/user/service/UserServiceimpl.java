@@ -12,7 +12,7 @@ public class UserServiceimpl implements UserService{
 
 	@Override
 	public User findByUsername(String username) throws Exception {
-		return null;
+		return userDao.findByUsername(username);
 	}
 
 	@Override
