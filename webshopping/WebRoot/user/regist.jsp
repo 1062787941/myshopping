@@ -102,11 +102,7 @@
 	<div class="container header">
 		<div class="span5">
 			<div class="logo">
-			<!--  
-				<a href="http://localhost:8080/mango/"> 
-				-->
 				<img src="${pageContext.request.contextPath}/image/title.png" alt="网上购物" />
-					</a>
 			</div>
 		</div>
 		<div class="span9">
@@ -278,7 +274,7 @@
 								<dt>已经拥有账号了？</dt>
 								<dd>
 									立即登录即可体验在线购物！ <a
-										href="${pageContext.request.contextPath}/user_loginPage.action">立即登录</a>
+										href="login.jsp">立即登录</a>
 								</dd>
 							</dl>
 						</div>
