@@ -112,7 +112,7 @@
 			</div>
 		</div>
 
-		<%@ include file="menu.jsp"%>
+		<%@ include file="../WEB-INF/jsp/menu.jsp"%>
 
 	</div>
 	<div class="container register">

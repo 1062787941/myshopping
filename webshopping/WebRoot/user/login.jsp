@@ -25,7 +25,7 @@
 					<img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障" />
 </div>	</div>
 	
-	<%@ include file="menu.jsp" %>
+	<%@ include file="../WEB-INF/jsp/menu.jsp" %>
 	
 </div>	<div class="container login">
 		<div class="span12">
