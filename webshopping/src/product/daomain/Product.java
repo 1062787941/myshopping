@@ -1,5 +1,6 @@
 package product.daomain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import categorysecond.daomain.CategorySecond;
@@ -7,7 +8,7 @@ import categorysecond.daomain.CategorySecond;
 /**
  * 商品的实体对象
  */
-public class Product {
+public class Product implements Serializable{
 	private Integer pid;
 	private String pname;
 	private Double market_price;

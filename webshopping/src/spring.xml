@@ -78,10 +78,16 @@
       <bean id="categorySecondDao" class="categorysecond.dao.CategorySecondDaoImpl">
       		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
+      <bean id="categorySecondServiceID" class="categorysecond.service.CategorySecondService">
+      		<property name="categorySecondDao" ref="categorySecondDao"></property>
+      </bean>
       
       <!-- 商品 -->
       <bean id="productDao" class="product.dao.ProductDaoImpl">
       		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
+      </bean>
+      <bean id="productServiceID" class="product.service.ProductServiceImpl">
+      		<property name="dao" ref="productDao"></property>
       </bean>
       
 <!--       配置事务通知，即让哪些方法需要事务支持

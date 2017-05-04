@@ -13,12 +13,11 @@ import product.daomain.Product;
 import product.service.ProductService;
 import category.daomain.Category;
 import category.service.CategoryService;
-
 /**
  * 首页访问的Action
  */
 @Controller
-@SessionAttributes("categoryList")
+@SessionAttributes({"categoryList","hotList","newList"})
 public class IndexAction{
 	// 注入一级分类的Service:
 	private CategoryService categoryService;
@@ -28,11 +27,10 @@ public class IndexAction{
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
-	
+	@Resource(name="productServiceID")
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
-
 	/**
 	 * 执行的访问首页的方法:
 	 */
@@ -43,15 +41,14 @@ public class IndexAction{
 		// 将一级分类存入到Session的范围:
 		model.addAttribute("categoryList", cList);
 		// 查询热门商品:
-//		List<Product> hList = productService.findHot();
+		List<Product> hList = productService.findHot();
 		// 保存到值栈中:
-//		ActionContext.getContext().getValueStack().set("hList", hList);
+		model.addAttribute("hotList", hList);
 		// 查询最新商品:
-//		List<Product> nList = productService.findNew();
+		List<Product> nList = productService.findNew();
 		// 保存到值栈中:
-//		ActionContext.getContext().getValueStack().set("nList", nList);
+		model.addAttribute("newList", nList);
 		return "/WEB-INF/jsp/index";
 	}
-	
 	
 }

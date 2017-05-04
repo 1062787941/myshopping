@@ -43,17 +43,15 @@ public class CategoryAction {
 		// 调用Service完成 一级分类的删除
 		// 级联删除一定先查询在删除:
 		categoryServiceId.delete(category);
-		// 进行页面转向:
 		return "/category/deleteSuccess";
 	}
 		
 	// 编辑一级分类的方法:
 	@RequestMapping("/edit")
 	public String edit(Category category){
-		// 接收cid:
 		// 根据cid进行查询:
 		category = categoryServiceId.findByCid(category.getCid());
-		// 完成页面转向:将一级分类数据显示到页面上.
+		//将一级分类数据显示到页面上.
 		return "/category/editSuccess";
 	}
 		
@@ -62,7 +60,6 @@ public class CategoryAction {
 	public String update(Category category){
 		// 使用模型驱动接收前台提交数据:
 		categoryServiceId.update(category);
-		// 页面跳转:
 		return "/category/updateSuccess";
 	}
 }

@@ -42,9 +42,12 @@
 	<ul class="mainNav">
 		<li><a href="${ pageContext.request.contextPath }/index.action">首页</a> |</li>
 		
-		<!-- 显示一级目录 -->
+		<!-- 显示一级目录导航条 -->
 		<c:forEach var="category" items="${categoryList}">
-			<li><a href="" >${category.cname}</a> |
+			<li>
+				<a href="${pageContext.request.contextPath }/product/findByCid.action?cid=${category.cid}&page=1">
+					${category.cname}
+				</a> |
 			</li>
 		</c:forEach>
 	</ul>

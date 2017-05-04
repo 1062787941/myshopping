@@ -20,7 +20,7 @@
 	<!--查询热门的商品,条件就是is_host = 1 -->
 	<select id="findHot" resultMap="productMap">
 		select pid,pname,market_price,shop_price,image,pdesc,pdate
-		from product where is_hot=1
+		from product where is_hot=1 ORDER BY pdate DESC LIMIT 0,10
 	</select>
 	
 	<!--首页上最新商品的查询 -->
