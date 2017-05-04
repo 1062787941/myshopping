@@ -26,14 +26,13 @@
         
       ">
       
-         <!-- 配置C3P0连接池,目的：管理数据库连接 -->
+       <!-- 配置C3P0连接池,目的：管理数据库连接 -->
       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" >
       		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
       		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/shop"/>
       		<property name="user" value="root"/>
       		<property name="password" value="root"/>
       </bean>
-      
       
       <!-- 配置SqlSessionFactoryBean，目的：加载mybaits配置文件和映射文件，即替代原Mybatis工具类的作用 -->
       <bean id="sqlSessionFactoryBeanID" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -45,7 +44,6 @@
       <bean id="dataSourceTransactionManagerID" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
       		<property name="dataSource" ref="dataSource"/>
       </bean>
-      
       
       <!-- 用户注入 -->
       <bean id="userDao" class="user.dao.UserDaoImpl">
@@ -72,6 +70,9 @@
       <bean id="categoryDao" class="category.dao.CategoryDaoImpl">
       		<property name="sessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
+      <bean id="categoryServiceID" class="category.service.CategoryService">
+      		<property name="categoryDao" ref="categoryDao"></property>
+      </bean>
       
       <!-- 二级目录 -->
       <bean id="categorySecondDao" class="categorysecond.dao.CategorySecondDaoImpl">
@@ -96,12 +97,30 @@
      		<aop:advisor advice-ref="tx" pointcut-ref="pointcut"/>
       </aop:config> -->
       
-		<!--  注册EmpAction -->
+		<!--  注册Action -->
       <context:component-scan base-package="*.action"/>
 
 	  <!-- 通知springioc容器这些注解的作用 -->
       <context:annotation-config />
       
+    <!-- 首页的问题 -->
+	<!-- 专用于jsp到jsp/html的转发控制器 -->
+   	<!-- 首页访问的Action -->
+
+      
+    <!-- 下面两个配合上面的ParameterizableViewController注解，不然报错-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+    <!-- 用户登录跳转 -->
+    <bean name="/login.action" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+    	<property name="viewName" value="/user/login"/>
+    </bean>
+    <!-- 用户注册跳转 -->
+    <bean name="/regist.action" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+    	<property name="viewName" value="/user/regist"/>
+    </bean>
+    
+    
  	 <!--视图解析器-->
       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       		<property name="suffix" value=".jsp"/>
