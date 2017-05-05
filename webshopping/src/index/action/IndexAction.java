@@ -24,9 +24,11 @@ public class IndexAction{
 	// 注入商品的Service
 	private ProductService productService;
 	@Resource(name="categoryServiceID")
+	
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
+	
 	@Resource(name="productServiceID")
 	public void setProductService(ProductService productService) {
 		this.productService = productService;

@@ -9,6 +9,9 @@
 	<resultMap type="categorysecond.daomain.CategorySecond" id="CategorySecondMap" >
 		<id property="csid" column="csid"/>
 		<result property="csname" column="csname"/>
+		<!-- 配置一级目录对二级目录中的以及目录(一对多的多的一方) -->
+		<association property="category" 
+				resultMap="CategoryNameSpace.categoryMap"/>
 	</resultMap>
 	 
 	 <!-- 统计二级分类个数的方法 -->

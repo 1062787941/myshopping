@@ -9,11 +9,17 @@
 	<resultMap type="category.daomain.Category" id="categoryMap" >
 		<id property="cid" column="cid"/>
 		<result property="cname" column="cname"/>
+		<!-- 配置一级目录对二级目录中的以及目录(一对多的少的一方) -->
+		<collection property="categorySeconds" 
+				resultMap="CategorySecondNameSpace.CategorySecondMap"/>
+				
 	</resultMap>
 	
 	<!-- 查询所有一级分类的方法 -->
 	<select id="findAll" resultMap="categoryMap">
-		select cid,cname from category
+		SELECT c.cid,c.cname,cs.csid,cs.csname
+		FROM category c JOIN categorysecond cs ON
+		 cs.cid = c.cid
 	</select>
 	
 	<!-- 保存一级分类的方法 -->
