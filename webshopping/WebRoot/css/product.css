@@ -1,15 +1,5 @@
 @charset "utf-8";
 
-/*
- * Copyright 2005-2013 dhcc.com.cn. All rights reserved.
- * Support: http://www.dhcc.com.cn
- * License: http://www.dhcc.com.cn/license
- * 
- * Style - Product
- * Version: 3.0
- */
-
-
 /* ---------- Score ---------- */
 
 div.score0 {
@@ -80,7 +70,7 @@ div.score10 {
 
 /* ---------- HotProductCategory ---------- */
 
-div.hotProductCategory {
+div .hotProductCategory {
 	width: 216px;
 	padding: 0px 6px;
 	margin-bottom: 10px;
@@ -91,7 +81,7 @@ div.hotProductCategory {
 	border: solid 1px #e4e4e4;
 }
 
-div.hotProductCategory dl {
+div .hotProductCategory dl {
 	width: 216px;
 	line-height: 30px;
 	float: left;
@@ -99,17 +89,17 @@ div.hotProductCategory dl {
 	border-bottom: solid 1px #f1f1f1;
 }
 
-div.hotProductCategory dl.last {
+div .hotProductCategory dl.last {
 	border-bottom: none;
 }
 
-div.hotProductCategory dt a {
+div .hotProductCategory dt a {
 	font-family: "Microsoft YaHei";
 	color: #2c64b1;
 	font-size: 14px;
 }
 
-div.hotProductCategory dd {
+div .hotProductCategory dd {
 	width: 100px;
 	float: left;
 	padding-right: 4px;

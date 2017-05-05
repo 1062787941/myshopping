@@ -16,4 +16,6 @@ public class CategorySecondAction {
 	public void setSecondService(CategorySecondService secondService) {
 		this.secondService = secondService;
 	}
+	
+	
 }

@@ -43,11 +43,11 @@
 		<li><a href="${ pageContext.request.contextPath }/index.action">首页</a> |</li>
 		
 		<!-- 显示一级目录导航条 -->
-		<c:forEach var="category" items="${categoryList}">
+		<c:forEach var="category" items="${categoryList}" begin="0" end="6">
 			<li>
 				<a href="${pageContext.request.contextPath }/product/findByCid.action?cid=${category.cid}&page=1">
 					${category.cname}
-				</a> |
+				</a>  |
 			</li>
 		</c:forEach>
 	</ul>
