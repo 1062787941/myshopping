@@ -90,6 +90,8 @@
       		<property name="dao" ref="productDao"></property>
       </bean>
       
+      <!-- 购物车 -->
+      
 <!--       配置事务通知，即让哪些方法需要事务支持
       <tx:advice id="tx" transaction-manager="dataSourceTransactionManagerID">
       		<tx:attributes>

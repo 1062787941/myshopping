@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import product.daomain.Product;
 import product.service.ProductService;
+import cart.daomain.Cart;
 import category.daomain.Category;
 import category.service.CategoryService;
 /**
  * 首页访问的Action
  */
 @Controller
-@SessionAttributes({"categoryList","hotList","newList"})
+@SessionAttributes({"categoryList","hotList","newList","cartSession"})
 public class IndexAction{
 	// 注入一级分类的Service:
 	private CategoryService categoryService;
@@ -50,6 +51,9 @@ public class IndexAction{
 		List<Product> nList = productService.findNew();
 		// 保存到值栈中:
 		model.addAttribute("newList", nList);
+		Cart cartSession = new Cart();
+		
+		model.addAttribute("cartSession", cartSession);
 		return "/WEB-INF/jsp/index";
 	}
 	
