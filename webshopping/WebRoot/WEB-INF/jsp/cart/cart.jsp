@@ -29,7 +29,7 @@
 </div>	
 	<div class="container cart">
 		<c:choose>
-			<c:when test="${cartSession.map.size > 0 }">
+			<c:when test="${cartSession.mapSize > 0}">
 				<div class="span24">
 			<div class="step step1">
 				购物车信息
@@ -44,26 +44,26 @@
 						<th>小计</th>
 						<th>操作</th>
 					</tr>
-						<c:forEach var="carItem" items="cartSession.cartItems" >
+						<c:forEach var="carItemMap" items="${cartSession.map}" >
 						<tr>
 							<td width="60">
-								<img src="${pageContext.request.contextPath}/${ cartItem.product.image}" />
+								<img src="${pageContext.request.contextPath}/${carItemMap.value.product.image}" />
 							</td>
 							<td>
-								<a target="_blank">${cartItem.product.pname}</a>
+								<a target="_blank">${carItemMap.value.product.pname}</a>
 							</td>
 							<td>
-								￥${cartItem.product.shop_price }
+								￥${carItemMap.value.product.shop_price }
 							</td>
 							<td class="quantity" width="60">
-								${cartItem.count }
+								${carItemMap.value.count }
 							</td>
 							<td width="140">
-								<span class="subtotal">￥${cartItem.subtotal }</span>
+								<span class="subtotal">￥${carItemMap.value.subtotal }</span>
 							</td>
 							<td>
 								<a href="${ pageContext.request.contextPath }
-									/cart/removeCart.action?pid=${cartItem.product.pid }" 
+									/cart/removeCart.action?pid=${carItemMap.value.product.pid }" 
 									class="delete">删除</a>
 							</td>
 						</tr>
@@ -90,7 +90,7 @@
 			<c:otherwise>
 				<div class="span24">
 					<div class="step step1">
-						<span><h2>亲!您还没有购物!请先去购物!${cartSession.map.size}</h2></span>
+						<span><h2>亲!您还没有购物!请先去购物!</h2></span>
 					</div>
 				</div>
 			</c:otherwise>
@@ -165,7 +165,7 @@
 <div class="container footer">
 	<div class="span24">
 		<div class="footerAd">
-					<img src="${pageContext.request.contextPath}/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+					<img src="${pageContext.request.contextPath}/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势" />
 </div>	</div>
 	<div class="span24">
 		<ul class="bottomNav">

@@ -53,23 +53,25 @@ public class CartAction {
 	}
 
 	// 清空购物车的执行的方法:
-	/*public String clearCart() {
+	@RequestMapping("/clearCart")
+	public String clearCart(@ModelAttribute("cartSession") Cart cartSession,ModelMap model) {
 		// 获得购物车对象.
-		Cart cart = getCart();
+		Cart cart = getCart(cartSession, model);
 		// 调用购物车中清空方法.
 		cart.clearCart();
-		return "clearCart";
+		return "/WEB-INF/jsp/cart/cart";
 	}
-*/
+
 	// 从购物车中移除购物项的方法:
-	/*public String removeCart() {
+	@RequestMapping("/removeCart")
+	public String removeCart(int pid,@ModelAttribute("cartSession") Cart cartSession,ModelMap model) {
 		// 获得购物车对象
-		Cart cart = getCart();
+		Cart cart = getCart(cartSession, model);
 		// 调用购物车中移除的方法:
 		cart.removeCart(pid);
 		// 返回页面:
-		return "removeCart";
-	}*/
+		return "/WEB-INF/jsp/cart/cart";
+	}
 
 	// 我的购物车:执行的方法
 	@RequestMapping("/myCart")
@@ -80,7 +82,6 @@ public class CartAction {
 	/**
 	 * 获得购物车的方法:从session中获得购物车.
 	 */
-	
 	private Cart getCart(@ModelAttribute("cartSession") Cart cartSession,ModelMap model) {
         System.out.println(cartSession);
         if(null == cartSession){

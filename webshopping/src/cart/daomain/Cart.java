@@ -12,6 +12,15 @@ public class Cart implements Serializable{
 	// 购物车属性
 	// 购物项集合:Map的key就是商品pid,value:购物项
 	private Map<Integer, CartItem> map = new LinkedHashMap<Integer, CartItem>();
+	private int mapSize;
+	
+	public int getMapSize() {
+		return map.size();
+	}
+
+	public void setMapSize(int mapSize) {
+		this.mapSize = mapSize;
+	}
 
 	public Map<Integer, CartItem> getMap() {
 		return map;
