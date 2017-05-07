@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>注册成功</title>
+	<title>消息页面</title>
 	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -19,12 +19,13 @@
 								width="128" height="128" />
 							</td>
 							<td style="padding-top:30px">
-								<font style="font-weight:bold; color:#FF0000"> </font> <br /> <br />
+								<font style="font-weight:bold; color:#FF0000"> </font> <br />
+								<span style="color: red">${mssage }</span> <br />
 								<a href="${ pageContext.request.contextPath }/index.action">首页</a>
 								<a
-								href="${ pageContext.request.contextPath }/user_registPage.action">注册</a>
+								href="${ pageContext.request.contextPath }/user/regist.action">注册</a>
 								<a
-								href="${ pageContext.request.contextPath }/user_loginPage.action">登录</a>
+								href="${ pageContext.request.contextPath }/user/login.action">登录</a>
 							</td>
 						</tr>
 					</table>

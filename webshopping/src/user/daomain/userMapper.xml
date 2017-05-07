@@ -16,6 +16,8 @@
 		<result property="addr" column="addr"/>
 		<result property="state" column="state"/>
 		<result property="code" column="code"/>
+		
+		<collection property="orders" resultMap="OrderNameSpace.orderMap"></collection>
 	</resultMap>
 	
 	<!-- 按名字查询是否有该用户 -->
@@ -47,7 +49,8 @@
 	
 	<!-- 用户登录 -->
 	<select id="login" parameterType="user.daomain.User" resultMap="userMap">
-		select uid,username,password,name,email,phone,addr,state,code
+		select uid,username,password,name,email,
+			phone,addr,state,code
 		from user
 		where username=#{username} and password=#{password}
 	</select>

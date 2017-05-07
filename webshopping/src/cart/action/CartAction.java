@@ -35,7 +35,6 @@ public class CartAction {
 	// 将购物项添加到购物车:执行的方法
 	@RequestMapping("/addCart")
 	public String addCart(Integer pid,Integer count,@ModelAttribute("cartSession") Cart cartSession,ModelMap model) {
-		System.out.println(cartSession+"-----");
 		// 封装一个CartItem对象.
 		CartItem cartItem = new CartItem();
 		// 设置数量:

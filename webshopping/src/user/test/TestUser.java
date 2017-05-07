@@ -19,10 +19,10 @@ public class TestUser {
 //		System.out.println(u.getName());
 		
 //		dao.update(new User(1, "xxxxx", "xxx", "哈哈", "aaa@shop.com", "15726607618", "北京市西三旗中腾建华3楼", 1, null, null));
-//		User u1 = dao.login(user);
-//		System.out.println(u1.getPassword());
+		User u1 = dao.login(user);
+		System.out.println(u1.getName());
 		
-		System.out.println(dao.findByUsername("xx"));
+//		System.out.println(dao.findByUsername("xx"));
 	}
 
 }

@@ -65,6 +65,9 @@
       <bean id="orderDao" class="orders.dao.OrderDaoImpl">
       		<property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"></property>
       </bean>
+      <bean id="orderServiceID" class="orders.service.OrderService">
+      		<property name="orderDao" ref="orderDao"></property>
+      </bean>
       
       <!-- 一级目录 -->
       <bean id="categoryDao" class="category.dao.CategoryDaoImpl">

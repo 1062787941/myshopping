@@ -14,6 +14,9 @@
 		<result property="name" column="name"/>
 		<result property="phone" column="phone"/>
 		<result property="addr" column="addr"/>
+		
+		<association property="user" resultMap="UserNameSpace.userMap"></association>
+		
 	</resultMap>
 	 
 	 <!-- 保存订单 -->

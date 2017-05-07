@@ -24,8 +24,8 @@ public class OrderTest {
 		Order order = new Order(7001,(double) 83,new Date(),101, "姜涛","15726607618 ",
 				" 北京市西三旗中",user,null);
 //		dao.save(order);
-//		int i = dao.findCountByUid(7);
-//		System.out.println(i);
+		int i = dao.findCountByUid(7);
+		System.out.println(i);
 //		
 //		List<Order> ls = dao.findPageByUid(7, 0, 10);
 //		System.out.println(ls);
