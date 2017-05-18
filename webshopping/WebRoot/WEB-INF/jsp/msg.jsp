@@ -25,7 +25,7 @@
 								<a
 								href="${ pageContext.request.contextPath }/user/regist.action">注册</a>
 								<a
-								href="${ pageContext.request.contextPath }/user/login.action">登录</a>
+								href="${ pageContext.request.contextPath }/user/loginAction.action">登录</a>
 							</td>
 						</tr>
 					</table>

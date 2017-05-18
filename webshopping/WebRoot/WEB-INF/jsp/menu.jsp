@@ -5,7 +5,7 @@
 	<div class="topNav clearfix">
 		<ul>
 		<c:choose>
-  		 <c:when test="${null == session_user}">
+  		 <c:when test="${null == session_user.name}">
   		 	<li id="headerLogin" class="headerLogin" style="display: list-item;">
 				<a href="${ pageContext.request.contextPath }/user/login.jsp">登录
 				</a>|
@@ -43,7 +43,7 @@
 		<li><a href="${ pageContext.request.contextPath }/index.action">首页</a> |</li>
 		
 		<!-- 显示一级目录导航条 -->
-		<c:forEach var="category" items="${categoryList}" begin="0" end="6">
+		<c:forEach var="category" items="${categoryList}">
 			<li>
 				<a href="${pageContext.request.contextPath }/product/findByCid.action?cid=${category.cid}&page=1">
 					${category.cname}

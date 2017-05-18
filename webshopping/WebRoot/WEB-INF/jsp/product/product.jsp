@@ -40,28 +40,29 @@
 	<div class="container productContent">
 		<div class="span6">
 			<div class="hotProductCategory">
-				<%-- <s:iterator var="c" value="#session.cList">
+				<!-- 左侧的以及目录二级 -->
+				<c:forEach var="c" items="${categoryList }">
 					<dl>
 						<dt>
 							<a
-								href="${ pageContext.request.contextPath }/product/findByCid.action?cid=${category.cid}&page=1">
-								<s:property
-									value="#c.cname" />
-									</a>
+								href="${pageContext.request.contextPath}/product/findByCid.action?cid=${c.cid }&page=1">
+									${c.cname }
+							</a>
 						</dt>
-						<s:iterator var="cs" value="#c.categorySeconds">
-							<dd>
-								<a
-									href="${ pageContext.request.contextPath }/product_findByCsid.action?csid=<s:property value="#cs.csid"/>&page=1"><s:property
-										value="#cs.csname" /></a>
-							</dd>
-						</s:iterator>
-					</dl>
-				</s:iterator> --%>
+							<c:forEach var="cs" items="${c.categorySeconds}">
+								<dd>
+									<a
+										href="${ pageContext.request.contextPath }
+											/product/findByCsid.action?csid=${cs.csid}&page=1">
+											${cs.csname}
+									</a>
+								</dd>
+							</c:forEach>
+						</dl>
+				</c:forEach>
 			</div>
-
-
 		</div>
+
 
 		<div class="span18 last">
 
